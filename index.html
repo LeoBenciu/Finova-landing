@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Finova – platformă de management financiar alimentată de AI și agenți inteligenți. Documente, facturi, plăți, rapoarte și bănci într-un singur loc – plus colaborare cu contabilul.">
+  <title>Finova – Management financiar cu AI pentru firma ta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #5271FF;
+      --primary-hover: #4661da;
+      --primary-light: #acbaf9;
+      --primary-glow: rgba(82, 113, 255, 0.15);
+      --bg: #EDEBEB;
+      --bg-subtle: #e8e6e6;
+      --card: #FFFFFF;
+      --text: #0f0f0f;
+      --text-secondary: #282828;
+      --text-tertiary: #686868;
+      --border: #CDCDCD;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+      --shadow-lg: 0 20px 48px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
+    section { padding: 3rem 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    h1 { font-size: 1.875rem; font-weight: 700; line-height: 1.2; margin: 0 0 0.75rem; letter-spacing: -0.02em; }
+    h2 { font-size: 1.5rem; font-weight: 700; margin: 0 0 1rem; color: var(--text); letter-spacing: -0.02em; }
+    p { margin: 0 0 0.75rem; color: var(--text-secondary); font-size: 1rem; }
+    .text-tertiary { color: var(--text-tertiary); font-size: 0.9375rem; }
+
+    /* Header */
+    header {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(205,205,205,0.5);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .logo img { height: 38px; width: auto; display: block; }
+    .logo .logo-text { letter-spacing: -0.02em; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      min-width: 140px;
+      padding: 0 1.5rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      color: white;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px var(--primary-glow), 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* Hero – modern split layout */
+    .hero {
+      padding: 3rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: 0 0;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, var(--primary-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-grid {
+      display: grid;
+      gap: 2.5rem;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-content { text-align: center; }
+    .hero-badges { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0.85rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-badge.ai {
+      background: linear-gradient(135deg, rgba(82, 113, 255, 0.12) 0%, rgba(124, 92, 191, 0.1) 100%);
+      border-color: rgba(82, 113, 255, 0.35);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      line-height: 1.25;
+      margin: 0 0 0.75rem;
+      max-width: 22ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 .highlight { color: var(--primary); display: block; margin-top: 0.25rem; }
+    .hero .subheadline { font-size: 1rem; color: var(--text-secondary); max-width: 32ch; margin: 0 auto 1.5rem; line-height: 1.6; }
+    .hero .cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+    .hero .btn-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      padding: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero .btn-icon:hover { border-color: var(--primary); background: var(--primary-light); }
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-dashboard {
+      width: 100%;
+      max-width: 680px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.12), 0 4px 20px var(--primary-glow);
+    }
+    .hero-dashboard-bar {
+      height: 32px;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 6px;
+    }
+    .hero-dashboard-bar span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .hero-dashboard-bar span:nth-child(1) { background: #ff5f57; }
+    .hero-dashboard-bar span:nth-child(2) { background: #febc2e; }
+    .hero-dashboard-bar span:nth-child(3) { background: #28c840; }
+    .hero-dashboard img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .hero-trust {
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .hero-trust-avatars {
+      display: flex;
+      margin-right: 0.25rem;
+    }
+    .hero-trust-avatars span {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+      border: 2px solid var(--card);
+      margin-left: -8px;
+    }
+    .hero-trust-avatars span:first-child { margin-left: 0; }
+    .hero-trust-text { font-size: 0.8125rem; font-weight: 600; color: var(--text); }
+    .hero-trust-sub { font-size: 0.75rem; color: var(--text-tertiary); margin-top: 2px; }
+    .hero-decor {
+      position: absolute;
+      bottom: 1rem;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: rgba(82, 113, 255, 0.06);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Problem – De ce Finova? (modern card grid) */
+    .problem {
+      background: var(--bg-subtle);
+      padding: 4rem 0 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .problem::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: 0 0;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .problem .container { position: relative; z-index: 1; }
+    .problem .section-label { display: block; text-align: center; margin-bottom: 0.75rem; }
+    .problem-badge-wrap { text-align: center; margin-bottom: 0.5rem; }
+    .problem-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 0.85rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      box-shadow: var(--shadow-sm);
+    }
+    .problem-headline {
+      text-align: center;
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+    .problem-headline .accent { color: var(--primary); }
+    .problem-sub {
+      text-align: center;
+      font-size: 0.9375rem;
+      color: var(--text-tertiary);
+      max-width: 40ch;
+      margin: 0 auto 2.5rem;
+      line-height: 1.5;
+    }
+    .problem-cta {
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 2rem 0 0;
+      line-height: 1.5;
+    }
+    .problem-grid {
+      display: grid;
+      gap: 1.25rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .problem-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.5rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      transition: all 0.25s ease;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .problem-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06), 0 4px 12px var(--primary-glow);
+      border-color: rgba(82, 113, 255, 0.2);
+    }
+    .problem-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(82, 113, 255, 0.08);
+      border: 1px solid rgba(82, 113, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .problem-card-icon svg { width: 24px; height: 24px; fill: var(--primary); }
+    .problem-card-text { min-width: 0; }
+    .problem-card-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      margin: 0 0 0.35rem;
+    }
+    .problem-card-desc {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Solution – Explorează funcțiile (reference: 1 big + 4 small cards) */
+    .solution {
+      background: linear-gradient(180deg, #e8f0fe 0%, rgba(232, 240, 254, 0.5) 40%, #f5f7ff 100%);
+      padding: 4rem 0 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .solution::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 30%, rgba(82, 113, 255, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(147, 112, 219, 0.03) 0%, transparent 50%);
+      background-size: 100% 100%;
+      pointer-events: none;
+    }
+    .solution::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle 1px at 10% 10%, rgba(82, 113, 255, 0.08) 0%, transparent 0%),
+        radial-gradient(circle 1px at 30% 60%, rgba(147, 112, 219, 0.06) 0%, transparent 0%),
+        radial-gradient(circle 1px at 70% 20%, rgba(82, 113, 255, 0.06) 0%, transparent 0%),
+        radial-gradient(circle 1px at 90% 80%, rgba(147, 112, 219, 0.05) 0%, transparent 0%);
+      background-size: 200px 200px, 180px 180px, 220px 220px, 190px 190px;
+      background-position: 0 0, 40px 60px, 80px 20px, 120px 100px;
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    .solution .container { position: relative; z-index: 1; }
+    .solution .section-label { display: block; text-align: center; margin-bottom: 0.75rem; }
+    .solution-badge { display: inline-flex; align-items: center; padding: 0.4rem 0.85rem; background: rgba(255,255,255,0.9); border: 1px solid rgba(82, 113, 255, 0.2); border-radius: 100px; font-size: 0.8125rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .solution .solution-badge-wrap { text-align: center; margin-bottom: 0.5rem; }
+    .solution-headline { text-align: center; font-size: 1.875rem; font-weight: 700; margin: 0 0 0.5rem; letter-spacing: -0.02em; line-height: 1.25; }
+    .solution-headline .accent { color: var(--primary); display: block; margin-top: 0.2rem; }
+    .solution-sub { text-align: center; font-size: 0.9375rem; color: var(--text-tertiary); max-width: 40ch; margin: 0 auto 2.5rem; line-height: 1.5; }
+    .solution-showcase {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 2px 12px rgba(82, 113, 255, 0.06);
+      margin-bottom: 3rem;
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto auto;
+    }
+    .solution-feature-main {
+      grid-column: 1;
+      background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(232, 240, 254, 0.4) 100%);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      border: 1px solid rgba(82, 113, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .solution-feature-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 80% 20%, rgba(82, 113, 255, 0.05) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .solution-feature-main .feature-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .solution-feature-main .feature-label-icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+      border-radius: 4px;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+    .solution-feature-main .feature-graphic {
+      width: 120px;
+      height: 120px;
+      margin: 1rem auto;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 50%, #7c5cbf 100%);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 12px 32px rgba(82, 113, 255, 0.2);
+    }
+    .solution-feature-main .feature-graphic::before {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      border: 3px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+    }
+    .solution-feature-main h3 { font-size: 1.375rem; font-weight: 700; margin: 1rem 0 0.5rem; color: var(--text); letter-spacing: -0.02em; position: relative; z-index: 1; }
+    .solution-feature-main p { font-size: 0.9375rem; color: var(--text-secondary); margin: 0; line-height: 1.5; position: relative; z-index: 1; }
+    .solution-features-grid {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+    .solution-feature-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.98) 0%, rgba(232, 240, 254, 0.3) 100%);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      border: 1px solid rgba(82, 113, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .solution-feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 100% 0%, rgba(82, 113, 255, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .solution-feature-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(82, 113, 255, 0.08); }
+    .solution-feature-card .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .solution-feature-card .card-icon.gradient-1 { background: linear-gradient(135deg, #acbaf9 0%, #7c5cbf 100%); }
+    .solution-feature-card .card-icon.gradient-2 { background: linear-gradient(135deg, #c4b5fd 0%, #5271FF 100%); }
+    .solution-feature-card .card-icon svg { width: 24px; height: 24px; fill: white; }
+    .solution-feature-card h4 { font-size: 1rem; font-weight: 700; margin: 0 0 0.25rem; color: var(--text); position: relative; z-index: 1; }
+    .solution-feature-card p { font-size: 0.8125rem; color: var(--text-secondary); margin: 0; line-height: 1.45; position: relative; z-index: 1; }
+    .solution-feature-card .card-stat { font-size: 1.75rem; font-weight: 800; color: var(--primary); letter-spacing: -0.02em; margin-top: 0.5rem; position: relative; z-index: 1; }
+    .solution-feature-card .card-bars { margin-top: 0.75rem; position: relative; z-index: 1; }
+    .solution-feature-card .card-bar-item { margin-bottom: 0.75rem; }
+    .solution-feature-card .card-bar-item:last-child { margin-bottom: 0; }
+    .solution-feature-card .card-bar-label { font-size: 0.8125rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; }
+    .solution-feature-card .card-bar-track { height: 6px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
+    .solution-feature-card .card-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--primary-light) 0%, var(--primary) 100%); }
+    .solution-feature-card .card-bar-fill.w70 { width: 70%; }
+    .solution-feature-card .card-bar-fill.w90 { width: 90%; }
+    .solution-decor {
+      text-align: center;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: rgba(82, 113, 255, 0.05);
+      margin-bottom: 2rem;
+      pointer-events: none;
+      user-select: none;
+    }
+    /* ...și alte funcții – matches Explorează funcțiile style */
+    .more-features-wrap {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: var(--radius-xl);
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(82, 113, 255, 0.12);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 2px 12px rgba(82, 113, 255, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .more-features-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 80% 20%, rgba(82, 113, 255, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(147, 112, 219, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    .more-features-inner { position: relative; z-index: 1; }
+    .more-features-title {
+      text-align: center;
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 0.25rem;
+      letter-spacing: -0.02em;
+    }
+    .more-features-title .accent { color: var(--primary); }
+    .more-features-sub {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-tertiary);
+      margin: 0 0 1.75rem;
+    }
+    .features {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 0;
+    }
+    .feature {
+      background: linear-gradient(145deg, rgba(255,255,255,0.98) 0%, rgba(232, 240, 254, 0.35) 100%);
+      padding: 1.5rem 1.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(82, 113, 255, 0.12);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 100% 0%, rgba(82, 113, 255, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .feature:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(82, 113, 255, 0.08);
+      border-color: rgba(82, 113, 255, 0.2);
+    }
+    .feature-title { font-weight: 600; font-size: 1rem; margin: 0 0 0.4rem; color: var(--text); letter-spacing: -0.01em; position: relative; z-index: 1; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .feature-ai-tag {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+      color: white;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(82, 113, 255, 0.25);
+    }
+    .feature-desc { font-size: 0.9375rem; color: var(--text-secondary); margin: 0; line-height: 1.5; position: relative; z-index: 1; }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 50%, #7c5cbf 100%);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.875rem;
+      box-shadow: 0 4px 12px rgba(82, 113, 255, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+    .feature-icon svg { width: 24px; height: 24px; flex-shrink: 0; fill: white; }
+
+    /* Audience */
+    .audience { background: var(--bg-subtle); padding: 3.5rem 0; }
+    .audience .container > .section-label { display: block; text-align: center; }
+    .audience h2 { text-align: center; }
+    .audience p { text-align: center; max-width: 36ch; margin-left: auto; margin-right: auto; }
+    .audience .note { font-size: 0.9375rem; color: var(--text-tertiary); margin-top: 0.5rem; text-align: center; }
+
+    /* CTA + Form – refined, matches Explorează funcțiile aesthetic */
+    .cta-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+      padding: 4rem 0 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .cta-section .container { position: relative; z-index: 1; }
+    .cta-section .section-label {
+      display: block;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 0.5rem;
+    }
+    .cta-section h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: white;
+      font-size: 1.875rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .cta-section .sub {
+      text-align: center;
+      color: rgba(255,255,255,0.92);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      max-width: 36ch;
+      margin: 0 auto 2rem;
+    }
+    .form-wrap {
+      max-width: 440px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 2.25rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group:last-of-type { margin-bottom: 1.5rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--card);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-tertiary); }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+    .form-wrap .btn {
+      width: 100%;
+      margin-top: 0;
+      min-height: 52px;
+      font-size: 1rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .form-wrap .btn:hover { box-shadow: 0 6px 20px var(--primary-glow); }
+
+    /* Footer */
+    footer {
+      background: var(--card);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-tagline { font-size: 0.875rem; color: var(--text-tertiary); }
+
+    /* Desktop */
+    @media (min-width: 768px) {
+      section { padding: 4rem 0; }
+      h1 { font-size: 2.25rem; }
+      h2 { font-size: 1.75rem; }
+      .hero { padding: 4rem 0 6rem; }
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        text-align: left;
+      }
+      .hero-content { text-align: left; }
+      .hero-badges { justify-content: flex-start; }
+      .hero h1 { font-size: 2.5rem; max-width: none; margin-left: 0; margin-right: 0; }
+      .hero .subheadline { max-width: 38ch; margin-left: 0; margin-right: 0; font-size: 1.0625rem; }
+      .hero .cta-row { justify-content: flex-start; }
+      .hero-trust { justify-content: flex-start; }
+      .hero-visual { justify-content: center; }
+      .hero-dashboard { max-width: 600px; }
+      .problem-grid { grid-template-columns: repeat(2, 1fr); }
+      .problem-headline { font-size: 2rem; }
+      .solution-showcase {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1.5rem;
+        padding: 1.75rem;
+      }
+      .solution-feature-main { grid-row: span 2; display: flex; flex-direction: column; justify-content: center; padding: 2rem; }
+      .solution-feature-main .feature-graphic { width: 140px; height: 140px; margin: 1.5rem auto; }
+      .solution-features-grid { grid-column: 2; grid-row: span 2; }
+      .features { grid-template-columns: repeat(2, 1fr); }
+      .solution-headline { font-size: 2rem; }
+      .solution { padding: 4.5rem 0 5rem; }
+      .more-features-wrap { padding: 2.5rem 2rem; }
+    }
+
+    @media (min-width: 1024px) {
+      .hero h1 { font-size: 2.75rem; }
+      .hero-grid { gap: 4rem; }
+      .hero-dashboard { max-width: 760px; }
+      .features { grid-template-columns: repeat(3, 1fr); }
+      .solution-feature-main h3 { font-size: 1.5rem; }
+      .solution-feature-card { padding: 1.5rem; }
+      .solution-headline { font-size: 2.25rem; }
+      .solution-sub { font-size: 1rem; margin-bottom: 3rem; }
+      .more-features-wrap { padding: 3rem 2.5rem; border-radius: 28px; }
+      .more-features-title { font-size: 1.5rem; }
+      .cta-section h2 { font-size: 2.25rem; }
+      .cta-section .sub { font-size: 1rem; max-width: 40ch; }
+      .form-wrap { padding: 2.5rem; max-width: 460px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Finova acasă">
+        <img src="assets/logo-finova.png" alt="Finova" class="logo-img">
+      </a>
+      <a href="#contact" class="btn btn-primary">Vreau acces</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-badges">
+              <span class="hero-badge">Pentru firme mici, PFA și SRL</span>
+              <span class="hero-badge ai">Alimentat de AI și agenți inteligenți</span>
+            </div>
+            <h1>Gestionează toate finanțele firmei <span class="highlight">într-un singur loc.</span></h1>
+            <p class="subheadline">Documente, facturi, plăți, rapoarte, bănci – totul într-o platformă cu AI. Agenți inteligenți lucrează pentru tine: clasificare documente, răspunsuri rapide, automatizări. Plus colaborare cu contabilul, fără email-uri și dosare.</p>
+            <div class="cta-row">
+              <a href="#contact" class="btn btn-primary">Vreau acces</a>
+              <a href="#ce-poti-face" class="btn btn-icon" aria-label="Vezi funcțiile">→</a>
+            </div>
+            <div class="hero-trust">
+              <div class="hero-trust-avatars" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div>
+                <div class="hero-trust-text">Folosit de firme din România</div>
+                <div class="hero-trust-sub">AI & agenți inteligenți • Documente în siguranță • Focus ANAF</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-dashboard">
+              <div class="hero-dashboard-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+              <img src="assets/finova-dashboard.png" alt="Finova – Rapoarte financiare: Total Venituri, Total Cheltuieli, Profit Net, Venituri vs Cheltuieli, Flux Numerar" loading="eager">
+            </div>
+          </div>
+        </div>
+        <div class="hero-decor" aria-hidden="true">FINANȚE • FINOVA</div>
+      </div>
+    </section>
+
+    <section class="problem" id="de-ce-finova">
+      <div class="container">
+        <span class="section-label">Problema</span>
+        <div class="problem-badge-wrap">
+          <span class="problem-badge">Fără o platformă dedicată</span>
+        </div>
+        <h2 class="problem-headline">De ce <span class="accent">Finova?</span></h2>
+        <p class="problem-sub">Finanțele firmei rămân împrăștiate: documente în email, situații la contabil, plăți în alte aplicații.</p>
+        <ul class="problem-grid">
+          <li class="problem-card">
+            <div class="problem-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+            <div class="problem-card-text">
+              <div class="problem-card-title">Email & documente</div>
+              <p class="problem-card-desc">Trimiți facturi și chitanțe pe email – se pierd în corespondență.</p>
+            </div>
+          </li>
+          <li class="problem-card">
+            <div class="problem-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div>
+            <div class="problem-card-text">
+              <div class="problem-card-title">Lipsă vizibilitate</div>
+              <p class="problem-card-desc">Nu știi ce mai e de încasat sau de plătit – trebuie să cauți în mai multe locuri.</p>
+            </div>
+          </li>
+          <li class="problem-card">
+            <div class="problem-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg></div>
+            <div class="problem-card-text">
+              <div class="problem-card-title">Comunicare haotică</div>
+              <p class="problem-card-desc">Comunici cu contabilul pe WhatsApp – răspunsuri întârziate, fără istoric clar.</p>
+            </div>
+          </li>
+          <li class="problem-card">
+            <div class="problem-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L2 9v2h2v9h4v-7h4v7h4v-9h2V9L12 3zm0 2.18l6 3.82v1H6V9l6-3.82z"/></svg></div>
+            <div class="problem-card-text">
+              <div class="problem-card-title">Bănci și conturi împrăștiate</div>
+              <p class="problem-card-desc">Conturi la bănci diferite – intri în fiecare aplicație ca să vezi soldurile și tranzacțiile.</p>
+            </div>
+          </li>
+          <li class="problem-card">
+            <div class="problem-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+            <div class="problem-card-text">
+              <div class="problem-card-title">Facturare și plăți în aplicații diferite</div>
+              <p class="problem-card-desc">Facturi într-un soft, plăți în aplicația băncii – nimic nu e legat într-un singur loc.</p>
+            </div>
+          </li>
+          <li class="problem-card">
+            <div class="problem-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+            <div class="problem-card-text">
+              <div class="problem-card-title">Nu știi ce vrea contabilul</div>
+              <p class="problem-card-desc">Contabilul îți cere ceva, tu nu știi exact ce e de făcut sau uiti – fără task-uri clare.</p>
+            </div>
+          </li>
+        </ul>
+        <p class="problem-cta">Finova rezolvă toate aceste probleme – vezi cum mai jos.</p>
+      </div>
+    </section>
+
+    <section class="solution" id="ce-poti-face">
+      <div class="container">
+        <span class="section-label">Soluția</span>
+        <div class="solution-badge-wrap">
+          <span class="solution-badge">Funcționalități</span>
+        </div>
+        <h2 class="solution-headline">Explorează <span class="accent">funcțiile Finova</span></h2>
+        <p class="solution-sub">Platformă alimentată de agenți AI inteligenți: tot ce ține de finanțele firmei – documente, facturi, plăți, rapoarte, bănci – într-un singur loc. Și colaborare integrată cu contabilul.</p>
+        <div class="solution-showcase">
+          <div class="solution-feature-main">
+            <span class="feature-label"><span class="feature-label-icon" aria-hidden="true"></span> Platformă financiară cu AI</span>
+            <div class="feature-graphic" aria-hidden="true"></div>
+            <h3>Totul într-un loc</h3>
+            <p>Documente, facturi, plăți, rapoarte, bănci – gestionezi toate finanțele firmei din Finova. Agenți AI clasifică documente, răspund la întrebări și automatizează task-uri. Plus colaborare integrată cu contabilul, dacă lucrezi cu o firmă de contabilitate.</p>
+          </div>
+          <div class="solution-features-grid">
+            <div class="solution-feature-card">
+              <div class="card-icon gradient-1" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+              <h4>Facturi & plăți</h4>
+              <p>Facturi emise și primite, plăți direct din platformă.</p>
+            </div>
+            <div class="solution-feature-card">
+              <div class="card-icon gradient-2" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18V3H3zm4 14H5v-4h2v4zm4 0H9v-6h2v6zm4 0h-2V9h2v8z"/></svg></div>
+              <h4>Rapoarte & grafice</h4>
+              <p>Sumar financiar, grafice și rapoarte la un click.</p>
+            </div>
+            <div class="solution-feature-card">
+              <h4>Performanță</h4>
+              <div class="card-bars">
+                <div class="card-bar-item">
+                  <div class="card-bar-label">2x mai rapid</div>
+                  <div class="card-bar-track"><div class="card-bar-fill w70"></div></div>
+                </div>
+                <div class="card-bar-item">
+                  <div class="card-bar-label">Totul la un click</div>
+                  <div class="card-bar-track"><div class="card-bar-fill w90"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="solution-feature-card">
+              <div class="card-icon gradient-2" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
+              <h4>Documente în siguranță + AI</h4>
+              <p class="card-stat">99%</p>
+              <p>Agenți AI clasifică și structurează documentele. Focus pe reglementări România (ANAF, facturi electronice).</p>
+            </div>
+          </div>
+        </div>
+        <div class="solution-decor" aria-hidden="true">FUNCȚII • FINOVA</div>
+        <div class="more-features-wrap">
+          <div class="more-features-inner">
+            <h3 class="more-features-title">...și <span class="accent">alte funcții</span></h3>
+            <p class="more-features-sub">AI și agenți inteligenți la fiecare pas – fără bătăi de cap.</p>
+            <div class="features">
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2 5 5h-5V4zM8 12h8v2H8v-2zm0 4h8v2H8v-2z"/></svg></div>
+            <div class="feature-title">Încarcă documente <span class="feature-ai-tag">AI</span></div>
+            <p class="feature-desc">Un singur loc pentru facturi, chitanțe și extrase. Agenți AI le clasifică și le organizează automat. Dacă ai contabil, le vede direct în platformă.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18V3H3zm4 14H5v-4h2v4zm4 0H9v-6h2v6zm4 0h-2V9h2v8z"/></svg></div>
+            <div class="feature-title">Vezi situația financiară</div>
+            <p class="feature-desc">Dashboard cu venituri, cheltuieli, facturi neîncasate/neplătite și sold bancar.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+            <div class="feature-title">Facturi emise</div>
+            <p class="feature-desc">Vizualizezi și creezi facturi direct din platformă – aplicație de facturare integrată.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg></div>
+            <div class="feature-title">Facturi de plătit</div>
+            <p class="feature-desc">Vezi ce ai de plătit și plătești direct din Finova – fără să mai schimbi aplicația.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L2 9v2h2v9h4v-7h4v7h4v-9h2V9L12 3zm0 2.18l6 3.82v1H6V9l6-3.82z"/></svg></div>
+            <div class="feature-title">Toate băncile într-un singur loc</div>
+            <p class="feature-desc">Conectezi conturile, vezi toate tranzacțiile și soldurile într-un singur ecran.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg></div>
+            <div class="feature-title">Agenți AI în chat <span class="feature-ai-tag">AI</span></div>
+            <p class="feature-desc">Agenți inteligenți răspund la întrebări despre situația ta financiară, rapoarte și documente – direct în platformă.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg></div>
+            <div class="feature-title">Rapoarte și grafice</div>
+            <p class="feature-desc">Sumar financiar, grafice și rapoarte – totul la un click.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+            <div class="feature-title">Mesaje cu contabilul</div>
+            <p class="feature-desc">Comunicare directă cu contabilul în platformă – dacă lucrezi cu o firmă de contabilitate Finova. Fără email sau WhatsApp.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+            <div class="feature-title">Sarcini de la contabil</div>
+            <p class="feature-desc">Primești task-uri și remindere de la contabil direct în Finova – știi exact ce e de făcut.</p>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="audience" id="pentru-cine">
+      <div class="container">
+        <span class="section-label">Public țintă</span>
+        <h2>Pentru cine e Finova</h2>
+        <p>Firme mici, PFA și SRL-uri. Antreprenori care vor să gestioneze finanțele într-un singur loc – simplu și transparent, cu ajutorul agenților AI inteligenți.</p>
+      </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+      <div class="container">
+        <span class="section-label">Contact</span>
+        <h2>Vreau acces</h2>
+        <p class="sub">Completează formularul și te contactăm. Poți folosi Finova direct sau prin firma de contabilitate cu care lucrezi.</p>
+        <div class="form-wrap">
+          <!-- Web3Forms: get a free access key at https://web3forms.com (use nextcorpromania@gmail.com as recipient), then replace YOUR_WEB3FORMS_ACCESS_KEY below -->
+          <form id="waitlist-form">
+            <input type="hidden" name="access_key" id="web3forms-access-key" value="9835c6f2-649a-4895-a8fb-73d1ac95de94">
+            <div class="form-group">
+              <label for="name">Nume</label>
+              <input type="text" id="name" name="name" required placeholder="Numele tău sau firma">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="_replyto" required placeholder="email@exemplu.ro">
+            </div>
+            <div class="form-group">
+              <label for="message">Mesaj (opțional)</label>
+              <textarea id="message" name="message" placeholder="Ex: Vreau să gestionez finanțele firmei în Finova."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="form-submit-btn">Vreau acces</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-tagline">Finova – management financiar pentru firma ta</span>
+      <div class="footer-links">
+        <a href="politica-confidentialitate.html">Politica de confidențialitate</a>
+        <a href="termeni-conditii.html">Termeni și condiții</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var btn = document.getElementById('form-submit-btn');
+      var accessKey = (document.getElementById('web3forms-access-key').value || '').trim();
+      if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+        alert('Configurare necesară: Obține o cheie gratuită de la https://web3forms.com (folosește nextcorpromania@gmail.com) și înlocuiește YOUR_WEB3FORMS_ACCESS_KEY în acest fișier.');
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Se trimite...';
+      var payload = {
+        access_key: accessKey,
+        subject: 'Finova – Cerere acces',
+        name: (form.querySelector('[name="name"]').value || '').trim(),
+        from: (form.querySelector('[name="_replyto"]').value || '').trim(),
+        message: (form.querySelector('[name="message"]').value || '').trim()
+      };
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function(r) { return r.json().then(function(data) { return { ok: r.ok, data: data }; }); })
+        .then(function(result) {
+          if (result.ok && result.data && result.data.success) {
+            alert('Mulțumim! Te vom contacta în curând.');
+            form.reset();
+          } else {
+            throw new Error(result.data && result.data.message ? result.data.message : 'Eroare la trimitere');
+          }
+        })
+        .catch(function() {
+          alert('A apărut o eroare. Te rugăm să încerci din nou sau să ne trimiți un email la nextcorpromania@gmail.com.');
+        })
+        .finally(function() {
+          btn.disabled = false;
+          btn.textContent = 'Vreau acces';
+        });
+    });
+  </script>
+</body>
+</html>
